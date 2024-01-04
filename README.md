@@ -1,1 +1,1 @@
-# detection_maladie
+# Detection maladie
