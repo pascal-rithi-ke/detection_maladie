@@ -1,6 +1,6 @@
 # React + Vite
 
-in front folder
+**In front folder**
 
-npm install
-npm run dev
+```npm install```
+```npm run dev```
