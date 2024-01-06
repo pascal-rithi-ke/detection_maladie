@@ -1,7 +1,7 @@
 #root {
   width: 100%;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 3rem;
   text-align: center;
 }
 
@@ -22,12 +22,25 @@
   padding: 1rem;
   border-bottom: 2px solid white;
 }
+.App-part-text{
+  margin-left: 20px;
+  margin-right: 20px;
+  text-align: left;
+  p{
+    font-size: 12px;
+  }
+}
 .App-part-content{
   margin-top: 15px;
 }
 .App-part-container-preview-img{
   margin: 25px;
+  display: grid;
 }
+.App-part-content-preview-img{
+  width: 100%;
+}
+
 .preview-img{
   width: 55%;
 }
