@@ -1,9 +1,13 @@
 import { useState } from 'react'
 import axios from 'axios'
 
-import './App.css'
+import '../../css/App.css'
 
-function App() {
+// Components
+import NavBar from '../components/NavBar.jsx'
+import Footer from '../components/footer.jsx'
+
+function DetecImg() {
   const [image, setImage] = useState(null);
   const [result, setResult] = useState(null);
   const [imagePreview, setImagePreview] = useState(null);
@@ -69,6 +73,8 @@ function App() {
   }
 
   return (
+    <>
+      <NavBar />
       <div className="App">
         
         <div className='App-part'>
@@ -119,9 +125,10 @@ function App() {
             </>
           )}
         </div>
-
       </div>
+      <Footer />
+    </>
   )
 }
 
-export default App
+export default DetecImg

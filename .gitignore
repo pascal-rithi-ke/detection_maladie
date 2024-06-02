@@ -3,3 +3,12 @@
 
 ### pycache ###
 __pycache__
+
+### Jupyter Notebook ###
+.ipynb
+
+### node_modules ###
+node_modules
+
+### venv ###
+venv

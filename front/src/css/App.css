@@ -7,9 +7,18 @@
 
 /* APP */
 .App {
-  display: flex;
   min-height: 60vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
+
+.App p {
+  font-size: 1.5rem;
+  margin: 1rem;
+}
+
 .App-part{
   width: 50%;
   border: 2px solid white;
