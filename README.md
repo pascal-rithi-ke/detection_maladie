@@ -9,3 +9,6 @@
 # Front
 * ```npm install```
 * ```npm run dev```
+
+# Update Python file when installing news libs
+* ```sh update.sh```
