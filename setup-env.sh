@@ -4,5 +4,3 @@ python -m venv venv
 source venv/Scripts/activate
 # Install python packages
 pip install -r requirements.txt
-# Deactivate python environment
-deactivate
