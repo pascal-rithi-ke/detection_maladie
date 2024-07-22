@@ -4,11 +4,11 @@
 ### pycache ###
 __pycache__
 
-# Exclure les dossiers spécifiques contenant des notebooks
-model/**/*.ipynb
-
 ### node_modules ###
 node_modules
 
 ### venv ###
 venv
+
+### Exclure un fichier spécifique ###
+test.py
