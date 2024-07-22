@@ -12,3 +12,5 @@ venv
 
 ### Exclure un fichier spécifique ###
 test.py
+
+note.txt
