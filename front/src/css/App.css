@@ -12,6 +12,8 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  width: 60%;
+  padding: 50px;
 }
 
 .App p {
@@ -75,4 +77,19 @@
   height: 100%;
   opacity: 0;
   cursor: pointer;
+}
+
+.container {
+  display: flex;
+  height: calc(100vh - 100px); /* Ajustez en fonction de la taille de votre NavBar et Footer */
+}
+
+.chat-container {
+  flex: 1;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
 }

@@ -2,7 +2,7 @@ import { useState } from 'react'
 import axios from 'axios'
 
 // Components
-import NavBar from '../components/NavBar.jsx'
+import NavBar from '../components/VerticalMenu.jsx'
 import Footer from '../components/footer.jsx'
 
 // CSS

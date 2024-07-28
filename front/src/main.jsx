@@ -19,9 +19,11 @@ ReactDOM.createRoot(document.getElementById('root')).render(
   <BrowserRouter>
     <Routes>
       <Route path="/" element={<Home />} />
-      <Route path="/img-detection" element={<DetecImg />} />
       <Route path="/Assistant" element={<Assistant />} />
+      {/*}
+      <Route path="/img-detection" element={<DetecImg />} />
       <Route path="/ordonnance" element={<Ordonnance />} />
+      */}
       {/* Si la route n'existe pas */}
       <Route path="*" element={<Error404 />} />
     </Routes>

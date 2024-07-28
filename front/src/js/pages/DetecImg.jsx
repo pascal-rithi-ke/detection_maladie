@@ -4,7 +4,7 @@ import axios from 'axios'
 import '../../css/App.css'
 
 // Components
-import NavBar from '../components/NavBar.jsx'
+import NavBar from '../components/Chatbot.jsx'
 import Footer from '../components/footer.jsx'
 
 function DetecImg() {
