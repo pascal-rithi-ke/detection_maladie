@@ -2,12 +2,11 @@ function Footer() {
     return (
         <div className="footer">
             <div className="footer-content">
-                <p>Réalisé par:
-                    <a href="https://github.com/pascal-rithi-ke/detection_maladie" target="_blank">
-                        <span> Eng Pascal Kien </span>
+                <p>©2024 -
+                    <a href="https://github.com/pascal-rithi-ke/" target="_blank">
+                        <span> Pascal Ke </span>
                     </a>
                 </p>
-                <p>@ 2024</p>
             </div>
         </div>
     )

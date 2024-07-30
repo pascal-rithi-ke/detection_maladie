@@ -69,7 +69,7 @@ def search_word_similarity(word):
     df1 = pd.read_csv("../data/cleaned_symptom_severity.csv")
     known_symptoms_array = df1['Symptom'].values
     symptoms_weights = df1['weight'].values
-    minimum_similarity_threshold = 0.85
+    minimum_similarity_threshold = 0.5
     symptom_similarity_mapping = []
 
     for symptom, weight in zip(known_symptoms_array, symptoms_weights):

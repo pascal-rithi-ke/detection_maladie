@@ -3,8 +3,9 @@ import ReactDOM from 'react-dom/client'
 
 // Pages
 import Home from './js/pages/Home.jsx'
-import DetecImg from './js/pages/DetecImg.jsx'
 import Assistant from './js/pages/Assistant.jsx'
+
+import DetecImg from './js/pages/DetecImg.jsx'
 import Ordonnance from './js/pages/Ordonnance.jsx'
 
 // Error Pages
@@ -20,10 +21,6 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/Assistant" element={<Assistant />} />
-      {/*}
-      <Route path="/img-detection" element={<DetecImg />} />
-      <Route path="/ordonnance" element={<Ordonnance />} />
-      */}
       {/* Si la route n'existe pas */}
       <Route path="*" element={<Error404 />} />
     </Routes>

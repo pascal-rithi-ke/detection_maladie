@@ -1,19 +1,18 @@
 #root {
   width: 100%;
   margin: 0 auto;
-  padding: 3rem;
   text-align: center;
+  overflow: hidden;
 }
 
 /* APP */
 .App {
-  min-height: 60vh;
+  /*min-height: 60vh;*/
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 60%;
-  padding: 50px;
+  padding: 10px;
 }
 
 .App p {
@@ -92,4 +91,58 @@
   justify-content: center;
   align-items: center;
   box-sizing: border-box;
+}
+
+/* Responsive Mobile */
+@media (max-width: 768px) {
+  :root {
+    font-size: 14px;
+  }
+}
+
+.chatbot-input {
+  display: flex;
+  align-items: center;
+  border-radius: 8px;
+}
+
+.chatbot-buttons{
+  display: grid;
+}
+
+.new-chat, button {
+  background-color: #4CAF50; /* Couleur de fond des boutons */
+  border: none;              /* Suppression de la bordure par défaut */
+  color: white;              /* Couleur du texte */
+  text-align: center;        /* Alignement du texte */
+  text-decoration: none;     /* Suppression de la décoration de texte */
+  display: inline-block;     /* Pour que les boutons soient en ligne */
+  margin: 4px 2px;           /* Espacement autour des boutons */
+  border-radius: 12px;       /* Coins arrondis */
+  cursor: pointer;           /* Curseur en forme de main */
+  transition: background-color 0.3s; /* Transition douce pour le changement de couleur */
+}
+
+.new-chat img, .arrow {
+  width: 24px; /* Taille des icônes */
+  height: 24px;
+}
+
+button:hover, .new-chat:hover {
+  background-color: #45a049; /* Couleur au survol */
+}
+
+textarea {
+  flex: 1;                   /* Prend tout l'espace disponible */
+  border: 1px solid #ccc;    /* Bordure légère */
+  border-radius: 8px;        /* Coins arrondis */
+  padding: 10px;             /* Espacement intérieur */
+  font-size: 16px;           /* Taille de la police */
+  resize: none;              /* Empêche le redimensionnement */
+  margin-left: 10px;         /* Espacement entre le textarea et les boutons */
+}
+
+textarea:focus {
+  outline: none;             /* Supprime le contour bleu par défaut */
+  border-color: #4CAF50;     /* Bordure de couleur différente lors du focus */
 }

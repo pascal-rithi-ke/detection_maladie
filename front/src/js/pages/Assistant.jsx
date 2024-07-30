@@ -7,12 +7,9 @@ import Chatbot from '../components/Chatbot.jsx' // Importez le composant Chatbot
 function Assistant() {
     return (
         <>
-            <div style={{ display: 'flex' }}>
-                <VerticalMenu />
-                <div className="App">
-                    <h1>Assistant</h1>
-                    <Chatbot /> {/* Ajoutez le composant Chatbot */}
-                </div>
+            <VerticalMenu />
+            <div className="App">
+                <Chatbot /> {/* Ajoutez le composant Chatbot */}
             </div>
             <Footer />
         </>
