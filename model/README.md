@@ -1,5 +1,1 @@
-# Detection maladie
-
-# NoteBook
-
-Where we train our model
+Le modèle Random Forest à plus de 0.9 d'accuracy
