@@ -12,5 +12,3 @@ source venv/bin/activate  # Note: On Windows, use venv\Scripts\activate
 # 4. Upgrade pip and install required packages
 pip install --upgrade pip
 pip install -r requirements.txt
-
-echo "Environment setup complete with Python 3.11.7."
