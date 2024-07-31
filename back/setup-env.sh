@@ -38,5 +38,3 @@ source venv/bin/activate
 # Upgrade pip and install required packages
 pip install --upgrade pip
 pip install -r requirements.txt
-
-echo "Environment setup complete with Python $PYTHON_VERSION."
