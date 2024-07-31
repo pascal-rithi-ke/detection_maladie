@@ -5,7 +5,7 @@ import '../../css/App.css'
 
 // Components
 import NavBar from '../components/Chatbot.jsx'
-import Footer from '../components/footer.jsx'
+import Footer from '../components/Foot.jsx'
 
 function DetecImg() {
   const [image, setImage] = useState(null);

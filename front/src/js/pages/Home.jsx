@@ -3,7 +3,7 @@ import axios from 'axios'
 
 // Components
 import NavBar from '../components/VerticalMenu.jsx'
-import Footer from '../components/footer.jsx'
+import Footer from '../components/Foot.jsx'
 
 // CSS
 import '../../css/App.css'

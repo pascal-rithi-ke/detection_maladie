@@ -5,7 +5,7 @@ import '../../css/App.css'
 
 // Components
 import NavBar from '../components/VerticalMenu.jsx'
-import Footer from '../components/footer.jsx'
+import Footer from '../components/Foot.jsx'
 
 function Ordonnance() {
   const [image, setImage] = useState(null);
