@@ -1,0 +1,17 @@
+.error404 {
+    display: grid;
+    place-items: center;
+    height: 100%;
+    width: 100%;
+    span{
+        color: #646cff;
+        font-weight: bold;
+    }
+}
+
+/* Affichage mobile */
+@media screen and (max-width: 600px){
+    .error404-img{
+        width: 80%;
+    }
+}

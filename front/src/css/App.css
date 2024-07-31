@@ -7,17 +7,17 @@
 
 /* APP */
 .App {
-  /*min-height: 60vh;*/
+  min-height: 60vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 10px;
 }
 
 .App p {
   font-size: 1.5rem;
   margin: 1rem;
+  text-align: left;
 }
 
 .App-part{
@@ -96,7 +96,7 @@
 /* Responsive Mobile */
 @media (max-width: 768px) {
   :root {
-    font-size: 14px;
+    font-size: 14px !important;
   }
 }
 
@@ -108,10 +108,11 @@
 
 .chatbot-buttons{
   display: grid;
+  margin-left: 10px;
 }
 
 .new-chat, button {
-  background-color: #4CAF50; /* Couleur de fond des boutons */
+  background-color: white; /* Couleur de fond des boutons */
   border: none;              /* Suppression de la bordure par défaut */
   color: white;              /* Couleur du texte */
   text-align: center;        /* Alignement du texte */
@@ -137,7 +138,6 @@ textarea {
   border: 1px solid #ccc;    /* Bordure légère */
   border-radius: 8px;        /* Coins arrondis */
   padding: 10px;             /* Espacement intérieur */
-  font-size: 16px;           /* Taille de la police */
   resize: none;              /* Empêche le redimensionnement */
   margin-left: 10px;         /* Espacement entre le textarea et les boutons */
 }
@@ -145,4 +145,18 @@ textarea {
 textarea:focus {
   outline: none;             /* Supprime le contour bleu par défaut */
   border-color: #4CAF50;     /* Bordure de couleur différente lors du focus */
+}
+
+.HomePage-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centre horizontalement les éléments */
+  justify-content: center; /* Centre verticalement les éléments */
+  height: 100vh; /* S'assure que la div prend toute la hauteur de la page */
+  text-align: center; /* Centre le texte à l'intérieur des éléments */
+}
+
+.menu-icon{
+  width: 55px;
+  margin: 15px;
 }

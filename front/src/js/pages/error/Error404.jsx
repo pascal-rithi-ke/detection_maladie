@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import '../../../css/error404.css';
 
 function Error404() {
     
@@ -17,9 +18,10 @@ function Error404() {
     }
 
     return (
-        <div>
-            <h1>Erreur 404: Page non trouvée</h1>
-            <p>Redirection vers la page d'accueil dans {count} secondes...</p>
+        <div className="error404">
+            <h1>Erreur 404: <br/> Page non trouvée</h1>
+            <p>Redirection vers la page d'accueil dans <span>{count}</span> secondes...</p>
+            <img className="error404-img" src="../src/img/error404.webp" />
         </div>
     )
 }

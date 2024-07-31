@@ -12,11 +12,13 @@ function App() {
   return (
     <>
       <NavBar/>
-      <h1>Projet de détection de maladies</h1>
-      <div className="App">
-          <p>Le but de ce projet est de permettre à des patients de détecter des maladies à partir d'une image, d'ordonnances ou de discuter avec un assistant virtuel.</p>
+      <div className="HomePage-info">
+        <h1>Projet de détection de maladies</h1>
+        <div className="App">
+            <p>Le but de ce projet est de permettre à des patients de détecter des maladies à partir d'une discution avec un assistant virtuel.</p>
+        </div>
+        <Footer/>
       </div>
-      <Footer/>
     </>
   )
 }
