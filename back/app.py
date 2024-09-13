@@ -58,6 +58,8 @@ def processImage():
 def chatbot():
     data = request.json
     user_message = data.get('message')
+    df2 = pd.read_csv("../data/symptom_Description.csv")
+    df3 = pd.read_csv("../data/symptom_precaution.csv")
     if user_message:
         bot_response = process_text(user_message)
         if bot_response == "":
@@ -81,10 +83,19 @@ def chatbot():
                 if disease_predictions:
                     detected_disease = disease_predictions[0]
                     probable_diseases = [disease for disease, _ in top_diseases if disease != detected_disease]
-                    bot_response = f"We have detected {detected_disease} as the illness, and these other conditions ({', '.join(probable_diseases)}) may also correspond to your symptoms."
-                    bot_response += "\n\nHere are the probabilities of the detected diseases:\n"
-                    for disease, probability in top_diseases:
-                        bot_response += f"{disease}: {probability:.2f}\n"
+                    disease_description = df2[df2['Disease'] == detected_disease]['Description'].values[0]
+                    disease_precautions = df3[df3['Disease'] == detected_disease]['Precaution_1'].values[0]
+                    disease_precautions = df3[df3['Disease'] == detected_disease]['Precaution_2'].values[0]
+                    disease_precautions = df3[df3['Disease'] == detected_disease]['Precaution_3'].values[0]
+                    disease_precautions = df3[df3['Disease'] == detected_disease]['Precaution_4'].values[0]
+                    bot_response = (
+                        f"The detected disease is {detected_disease}. {disease_description}. \n\n"
+                        f"Precautions: {disease_precautions} \n\n"
+                        f"The other likely diseases are: {', '.join(probable_diseases)}\n\n"
+                        f"Here our probabilities:\n" + 
+                        '\n'.join([f'{disease} ({probability:.2f})' for disease, probability in top_diseases])
+                    )
+                    
                 else:
                     bot_response = "No diseases detected based on the provided symptoms."
             except ValueError as e:

@@ -7,9 +7,6 @@ __pycache__
 ### node_modules ###
 node_modules
 
-## Exclure le notebook Jupyter dans le dossier model ##
-model/*.ipynb
-
 ### venv ###
 venv
 
