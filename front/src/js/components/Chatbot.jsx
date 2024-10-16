@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import '../../css/Chatbot.css';
 
 const Chatbot = () => {
@@ -6,6 +6,7 @@ const Chatbot = () => {
     const [messages, setMessages] = useState([]);
     const [isTyping, setIsTyping] = useState(false);
     const [typingMessage, setTypingMessage] = useState(''); // Message en cours d'écriture
+    const typingIntervalRef = useRef(null); // Ref pour l'intervalle
 
     const handleInputChange = (e) => {
         setInput(e.target.value);
@@ -15,8 +16,8 @@ const Chatbot = () => {
         if (input.trim() !== '') {
             const userMessage = { text: input, user: 'user' };
             setMessages([...messages, userMessage]);
-            setInput('');
-            setIsTyping(true);
+            setInput(''); // Efface le champ d'input seulement après l'envoi
+            setIsTyping(true); // Désactive l'envoi pendant que le bot tape
 
             try {
                 const response = await fetch('http://localhost:5000/chatbot', {
@@ -34,13 +35,13 @@ const Chatbot = () => {
                     setTypingMessage(''); // Reset message en cours d'écriture
 
                     // Effet "tape writing"
-                    const typingInterval = setInterval(() => {
+                    typingIntervalRef.current = setInterval(() => {
                         setTypingMessage((prev) => prev + fullMessage[index]);
                         index++;
 
                         if (index === fullMessage.length) {
-                            clearInterval(typingInterval);
-                            setIsTyping(false);
+                            clearInterval(typingIntervalRef.current);
+                            setIsTyping(false); // Réactive l'envoi après que le bot a fini
                             setMessages((prevMessages) => [
                                 ...prevMessages,
                                 { text: fullMessage, user: 'bot' },
@@ -58,14 +59,20 @@ const Chatbot = () => {
     };
 
     const handleKeyDown = (e) => {
-        if (e.key === 'Enter' && !e.shiftKey) {
+        if (e.key === 'Enter' && !e.shiftKey && !isTyping) {
             e.preventDefault();
             handleSendMessage();
         }
     };
 
     const clearMessage = () => {
-        setMessages([]);
+        setMessages([]); // Clear all messages
+        setIsTyping(false); // Ensure the typing status is reset
+        setTypingMessage(''); // Clear the message that was in typing state
+        if (typingIntervalRef.current) {
+            clearInterval(typingIntervalRef.current); // Clear the typing interval
+            typingIntervalRef.current = null; // Reset the ref to null
+        }
     };
 
     const renderMessageText = (text) => {
@@ -98,13 +105,14 @@ const Chatbot = () => {
                     onKeyDown={handleKeyDown}
                     placeholder="Type a message..."
                     rows="1"
+                    disabled={isTyping && input.trim() === ''} // Désactive si le bot tape et l'input est vide
                 />
                 <div className='chatbot-buttons'>
-                    <button onClick={handleSendMessage}>
-                        <img className='arrow' src="../src/img/arrow.svg"/>
+                    <button className='send' onClick={handleSendMessage} disabled={isTyping || input.trim() === ''}>
+                        Send
                     </button>
-                    <button className='new-chat' onClick={clearMessage}>
-                        <img className='chat' src="../src/img/write.png"/>
+                    <button className='send' onClick={clearMessage}>
+                        New chat
                     </button>
                 </div>
             </div>

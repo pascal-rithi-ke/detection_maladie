@@ -8,6 +8,12 @@ import nltk
 from nltk.corpus import wordnet
 
 import pandas as pd
+import re
+
+import pickle
+
+with open('../model/chatbox_random_forest.pkl', 'rb') as f:
+    loaded_model = pickle.load(f)
 
 # Vérifier et télécharger les ressources NLTK nécessaires
 # nltk.download('punkt')
@@ -65,29 +71,45 @@ def generate_wordcloud(text):
     plt.tight_layout(pad=0)
     plt.show()
 
-def search_word_similarity(word):
+def search_word_similarity(text):
+    # Charger les données à partir du fichier CSV
     df1 = pd.read_csv("../data/cleaned_symptom_severity.csv")
     known_symptoms_array = df1['Symptom'].values
-    symptoms_weights = df1['weight'].values
-    minimum_similarity_threshold = 0.5
+    symptom_ids = df1['Symptom_ID'].values
+    
+    minimum_similarity_threshold = 0.7
+
     symptom_similarity_mapping = []
 
-    for symptom, weight in zip(known_symptoms_array, symptoms_weights):
-        similarity = nlp(word).similarity(nlp(symptom))
-        if similarity > minimum_similarity_threshold:
-            symptom_similarity_mapping.append((symptom, similarity, weight))
+    # Nettoyer le texte utilisateur
+    text = clean_text(text)
+
+    # Rechercher des correspondances exactes (symptômes à plusieurs mots ou simples)
+    for symptom, symptom_id in zip(known_symptoms_array, symptom_ids):
+        if re.search(r'\b' + re.escape(symptom.lower()) + r'\b', text.lower()):
+            return [symptom_id] * 17  # Si une correspondance exacte est trouvée, on retourne l'ID du symptôme
+
+    # Si aucune correspondance exacte n'est trouvée, on procède à la similarité mot par mot
+    for word in text.split():  # Diviser le texte en mots simples
+        for symptom, symptom_id in zip(known_symptoms_array, symptom_ids):
+            similarity = nlp(word).similarity(nlp(symptom))
+            if similarity > minimum_similarity_threshold:
+                symptom_similarity_mapping.append((symptom, similarity, symptom_id))
 
     # Trier les résultats par similarité décroissante
     symptom_similarity_mapping.sort(key=lambda x: x[1], reverse=True)
-    
+
     # Sélectionner les 17 premiers éléments
     top_17 = symptom_similarity_mapping[:17]
-    
-    # Extraire les poids des 17 symptômes les plus similaires
-    weights = [weight for _, _, weight in top_17]
-    
+
+    # Extraire les IDs des 17 symptômes les plus similaires
+    symptom_ids = [symptom_id for _, _, symptom_id in top_17]
+
     # Compléter avec des zéros jusqu'à 17 éléments si nécessaire
-    while len(weights) < 17:
-        weights.append(0)
-    
-    return weights
+    while len(symptom_ids) < 17:
+        symptom_ids.append(0)
+
+    print(top_17)  # Affichage pour débogage
+
+    # Retourner les IDs des 17 symptômes les plus similaires
+    return symptom_ids

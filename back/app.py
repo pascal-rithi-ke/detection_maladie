@@ -60,42 +60,45 @@ def chatbot():
     user_message = data.get('message')
     df2 = pd.read_csv("../data/symptom_Description.csv")
     df3 = pd.read_csv("../data/symptom_precaution.csv")
+    
     if user_message:
+        # Nettoyer et traiter le message utilisateur
         bot_response = process_text(user_message)
+        
         if bot_response == "":
             bot_response = "Sorry, I don't understand or I don't have a response for that. Can you try again?"
             app.logger.debug('No response found')
         else:
-            # Tableau des symptômes connus avec leurs poids correspondants
-            weights_array = search_word_similarity(bot_response)
+            # Appeler search_word_similarity pour trouver les symptômes correspondants
+            symptoms_ids_or_predictions = search_word_similarity(bot_response)
+            
             try:
-                # Prédictions de la maladie
-                disease_predictions = model.predict([weights_array])
+                # Prédictions de la maladie basées sur les IDs des symptômes ou le texte
+                disease_predictions = model.predict([symptoms_ids_or_predictions])
                 
-                # Afficher les probabilités de prédiction
-                disease_probabilities = model.predict_proba([weights_array])
+                # Obtenir les probabilités de prédiction pour les maladies
+                disease_probabilities = model.predict_proba([symptoms_ids_or_predictions])
                 disease_probabilities = disease_probabilities[0]
                 disease_probabilities = {disease: probability for disease, probability in zip(model.classes_, disease_probabilities)}
                 
-                # Afficher les 5 maladies les plus probables
+                # Trier et obtenir les 5 maladies les plus probables
                 top_diseases = sorted(disease_probabilities.items(), key=lambda x: x[1], reverse=True)[:5]
                 
                 if disease_predictions:
                     detected_disease = disease_predictions[0]
                     probable_diseases = [disease for disease, _ in top_diseases if disease != detected_disease]
+                    
+                    # Récupérer la description et les précautions associées à la maladie détectée
                     disease_description = df2[df2['Disease'] == detected_disease]['Description'].values[0]
-                    disease_precautions = df3[df3['Disease'] == detected_disease]['Precaution_1'].values[0]
-                    disease_precautions = df3[df3['Disease'] == detected_disease]['Precaution_2'].values[0]
-                    disease_precautions = df3[df3['Disease'] == detected_disease]['Precaution_3'].values[0]
-                    disease_precautions = df3[df3['Disease'] == detected_disease]['Precaution_4'].values[0]
+                    precautions = df3[df3['Disease'] == detected_disease].values[0]
+                    
                     bot_response = (
-                        f"The detected disease is {detected_disease}. {disease_description}. \n\n"
-                        f"Precautions: {disease_precautions} \n\n"
-                        f"The other likely diseases are: {', '.join(probable_diseases)}\n\n"
-                        f"Here our probabilities:\n" + 
+                        f" TThe detected disease is {detected_disease}. {disease_description}. \n\n"
+                        f" Precautions: {', '.join(precautions)} \n\n"
+                        f" The other likely diseases are: {', '.join(probable_diseases)}\n\n"
+                        f" Here are the probabilities:\n" + 
                         '\n'.join([f'{disease} ({probability:.2f})' for disease, probability in top_diseases])
                     )
-                    
                 else:
                     bot_response = "No diseases detected based on the provided symptoms."
             except ValueError as e:

@@ -1,4 +1,5 @@
 # Detection maladie
+![Animation cool](./assets/detect-disease.gif)
 
 # Back
 * ```python -m venv venv```
